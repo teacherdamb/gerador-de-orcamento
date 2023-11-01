@@ -82,11 +82,11 @@ generatePDFButton.addEventListener("click", () => {
   const rectX = outerBorderX;
   const rectY = outerBorderY;
   const rectWidth = outerBorderWidth;
-  const rectHeight = 40;
+  const rectHeight = 30;
 
   doc.rect(rectX, rectY, rectWidth, rectHeight, "S");
 
-  const dividerY = rectY + rectHeight + 60;
+  const dividerY = rectY + rectHeight + 50;
   doc.setLineWidth(0.5);
   doc.line(rectX, dividerY, rectX + rectWidth, dividerY);
 
@@ -123,15 +123,15 @@ generatePDFButton.addEventListener("click", () => {
 
   // Posicione as informações do emissor no topo do retângulo e alinhe à esquerda
   const textX = rectX + 5; // Alinhe à esquerda
-  const textY = rectY + 10; // Ajuste o espaçamento do topo conforme necessário
+  const textY = rectY + 7; // Ajuste o espaçamento do topo conforme necessário
 
   doc.setFontSize(12);
   doc.text(emissorSpecificInfo, textX, textY, {
-    lineHeight: 8,
+    lineHeight: 18,
   });
 
   // Adicione as informações do cliente dentro do retângulo
-  const customerInfoY = rectY + rectHeight + 7;
+  const customerInfoY = rectY + rectHeight + 5;
 
   // Recupere todas as informações do cliente
   const clientName = document.getElementById("clientName").value;
@@ -191,8 +191,9 @@ function addProductsToPDF(doc, startX, startY) {
     "Comprimento (cm)",
     "Quantidade",
     "Valor Unitário (R$)",
+    "Valor Total (R$)",
   ];
-  const columnWidths = [50, 30, 40, 30, 40];
+  const columnWidths = [20, 25, 35, 30, 40, 40];
 
   // Calcule a largura total da tabela
   const tableWidth = columnWidths.reduce((a, b) => a + b, 0);
@@ -233,6 +234,7 @@ function addProductsToPDF(doc, startX, startY) {
       product.length,
       product.quantity,
       `R$ ${product.price.toFixed(2)}`,
+      `R$ ${(product.price * product.quantity).toFixed(2)}`, // Adicione o valor total do item
     ];
 
     for (let i = 0; i < rowData.length; i++) {
