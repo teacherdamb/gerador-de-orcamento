@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerador de Orçamento</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Ligue o seu arquivo CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="shortcut icon" href="/img/hypericon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
+  </head>
+  <body>
+    <header>
+        <nav class="navbar navbar-expand-lg text-center navbar-light bg-light" style="display: flex;
+        justify-content: center;">
+            <a class="navbar-brand" href="/index.html">
+                <div>
+                    <img src="./img/hypericon.png" width="50" height="50" class="d-inline-block align-top" alt="">
+                    <br>
+                    <p>Gerador de Orçamentos</p>
+                </div>
+              </a>
+          </nav>
+    </header>
+    <main class="container mt-4">
+        <section id="emissor" class="mb-4">
+          <div class="nova-section p-3">
+            <h2>Selecione o Emissor do Orçamento</h2>
+            <br>
+            <div class="mb-3">
+              <select id="emissorSelect" class="form-select">
+                <option value="">Selecione uma das opções...</option>
+                <option value="emissor1">Império da Limpeza</option>
+                <option value="emissor2">Kapforte</option>
+                <option value="emissor3">Conecta</option>
+              </select>
+            </div>
+          </div>
+          <div id="emissorInfo">
+            <!-- Os detalhes do emissor serão exibidos aqui -->
+          </div>
+        </section>
+
+        <section id="customer-info" class="mb-4">
+            <h2 class="text-center" style="margin-top: 3%;">Dados do Cliente</h2>
+            <form>
+              <div class="mb-3">
+                <label for="clientName" style="margin-top: 3%;" class="form-label">Nome do Cliente:</label>
+                <input type="text" id="clientName" class="form-control" required />
+              </div>
+    
+              <div class="mb-3">
+                <label for="clientEmail" class="form-label">E-mail do Cliente:</label>
+                <input type="email" id="clientEmail" class="form-control" required />
+              </div>
+
+            <div id="logoContainer" class="form-label"></div>
+
+            <label for="orcamentoCode" class="form-label">Código do Orçamento:</label>
+            <input type="text" id="orcamentoCode" class="form-control" required />
+
+            <label for="cpfCnpj" class="form-label">CPF / CNPJ:</label>
+            <input type="text" id="cpfCnpj" class="form-control" required />
+
+            <label for="endereco" class="form-label">Endereço:</label>
+            <input type="text" id="endereco" class="form-control" required />
+
+            <label for="bairro" class="form-label">Bairro:</label>
+            <input type="text" id="bairro" class="form-control" required />
+
+            <label for="cep" class="form-label">CEP:</label>
+            <input type="text" id="cep" class="form-control" required />
+
+            <label for="consultor" class="form-label">Consultor:</label>
+            <input type="text" id="consultor" class="form-control" required />
+          </form>
+        </section>
+
+        <section id="product-info">
+          <h2 class="text-center">Itens do Orçamento</h2>
+          <form>
+            <label for="productName" style="margin-top: 3%;">Nome do Produto:</label>
+            <input type="text" id="productName" required />
+
+            <label for="productWidth">Largura (cm):</label>
+            <input type="number" id="productWidth" step="0.01" required />
+
+            <label for="productLength">Comprimento (cm):</label>
+            <input type="number" id="productLength" step="0.01" required />
+
+            <label for="productQuantity">Quantidade:</label>
+            <input type="number" id="productQuantity" required />
+
+            <label for="productPrice">Vlr. Unitário (R$):</label>
+            <input type="number" id="productPrice" step="0.01" required />
+    
+            <div style="margin-top: 5%;     display: flex;
+            justify-content: space-between">
+                <button id="addProduct" class="btn btn-primary">Adicionar Produto <i class="fas fa-plus"></i></button>
+                <button id="cmd" class="btn btn-success">Gerar orçamento <i class="fas fa-star"></i></button>
+                
+                </div>
+          </form>
+
+          <ul id="productList">
+            <!-- Os produtos adicionados serão listados aqui -->
+          </ul>
+        </section>
+      </div>
+      <div id="editor"></div>
+    </main>
+
+    <footer>&copy; 2023 <a href="https://hyperlinking.com.br" target="_blank" style="color: white;">Hyperlinking Marketing Digital</a></footer>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"
+      integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.7.0/jspdf.plugin.autotable.min.js"
+      integrity="sha512-X9Dd3Srt5HE0bHN7+BVmP2Wn2Eltyrsvn+szOxrLlI8mW+fv3jaFjd+HxwYzRsbJL1PI63mvztyDbYU56OtlOA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="js/main.js"></script>
+    <!-- Ligue o seu arquivo JavaScript -->
+  </body>
+</html>
